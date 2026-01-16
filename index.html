@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Ph.D. Student Personal Website" />
+  <title>홍길동 | Ph.D. Student</title>
+
+  <style>
+    :root{
+      --bg: #0b0f17;
+      --panel: #11182a;
+      --text: #e6edf7;
+      --muted: #a9b6cc;
+      --line: rgba(255,255,255,.10);
+      --accent: #7aa2ff;
+      --accent2: #7ef0c8;
+      --shadow: 0 12px 30px rgba(0,0,0,.30);
+      --radius: 14px;
+      --max: 1100px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, Apple SD Gothic Neo, "Malgun Gothic", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 15% 15%, rgba(122,162,255,.18), transparent 60%),
+        radial-gradient(1000px 500px at 80% 20%, rgba(126,240,200,.14), transparent 55%),
+        linear-gradient(180deg, #070a10, var(--bg));
+      line-height: 1.55;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: var(--accent); }
+    .container{ width: min(var(--max), calc(100% - 36px)); margin: 0 auto; }
+
+    /* Top nav */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(7,10,16,.65);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 14px 0;
+      gap: 14px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 240px;
+    }
+    .brand .avatar{
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.25), transparent 55%),
+        linear-gradient(135deg, rgba(122,162,255,.9), rgba(126,240,200,.7));
+      box-shadow: 0 10px 22px rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    .brand .title{
+      display:flex; flex-direction:column;
+      gap: 2px;
+    }
+    .brand .title strong{ font-size: 14px; letter-spacing: .2px; }
+    .brand .title span{ font-size: 12px; color: var(--muted); }
+
+    nav ul{
+      list-style:none;
+      margin:0; padding:0;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    nav a{
+      display:inline-flex;
+      align-items:center;
+      padding: 9px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    nav a:hover{
+      border-color: var(--line);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+    }
+    nav a.active{
+      background: rgba(122,162,255,.14);
+      border-color: rgba(122,162,255,.28);
+      color: var(--text);
+    }
+
+    /* Hero */
+    .hero{
+      padding: 40px 0 16px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .card{
+      background: rgba(17,24,42,.82);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-main{
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-main:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(520px 220px at 10% 15%, rgba(122,162,255,.18), transparent 60%),
+        radial-gradient(520px 220px at 60% 0%, rgba(126,240,200,.12), transparent 55%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .hero-main > *{ position: relative; }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .2px;
+      margin-bottom: 10px;
+    }
+    .dot{
+      width: 8px; height:8px;
+      border-radius: 50%;
+      background: var(--accent2);
+      box-shadow: 0 0 0 4px rgba(126,240,200,.12);
+    }
+    h1{
+      margin: 0 0 10px;
+      font-size: 28px;
+      letter-spacing: -0.3px;
+    }
+    .subtitle{
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 70ch;
+    }
+    .chips{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 0;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--line);
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .hero-side{
+      padding: 18px;
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+    }
+    .mini{
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .mini h3{
+      margin: 0 0 8px;
+      font-size: 13px;
+      color: var(--text);
+      letter-spacing: .2px;
+    }
+    .mini p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .btnrow{ display:flex; flex-wrap:wrap; gap:10px; margin-top: 10px; }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      font-size: 13px;
+      color: var(--text);
+    }
+    .btn:hover{
+      border-color: rgba(122,162,255,.34);
+      background: rgba(122,162,255,.10);
+    }
+    .btn.primary{
+      border-color: rgba(122,162,255,.34);
+      background: rgba(122,162,255,.14);
+    }
+
+    /* Sections */
+    section{
+      padding: 16px 0;
+    }
+    .section-card{
+      padding: 22px;
+    }
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+    }
+    .section-head h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+    }
+    .section-head .hint{
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* Profile grids */
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .list{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .list li{
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .list li strong{
+      display:block;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .list li span{
+      display:block;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Publications */
+    .pub-tools{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      align-items:center;
+      justify-content: flex-end;
+    }
+    .input{
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+      min-width: 260px;
+    }
+    .input::placeholder{ color: rgba(169,182,204,.65); }
+    .select{
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-size: 13px;
+      outline:none;
+    }
+    .pub-list{
+      list-style:none;
+      margin: 0;
+      padding: 0;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .pub{
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .pub .title{
+      font-size: 14px;
+      margin: 0 0 6px;
+      letter-spacing: -.1px;
+    }
+    .pub .meta{
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .badge{
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      background: rgba(255,255,255,.03);
+    }
+    .pub .links{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .link{
+      font-size: 12px;
+      color: var(--muted);
+      border-bottom: 1px dashed rgba(169,182,204,.35);
+    }
+    .link:hover{ color: var(--text); border-bottom-color: rgba(122,162,255,.7); }
+
+    /* Projects */
+    .filters{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+    .pill{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .pill.active{
+      color: var(--text);
+      border-color: rgba(126,240,200,.35);
+      background: rgba(126,240,200,.10);
+    }
+    .proj-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .proj{
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      display:flex;
+      flex-direction:column;
+      gap: 8px;
+      min-height: 140px;
+    }
+    .proj h3{
+      margin: 0;
+      font-size: 14px;
+      letter-spacing: -.1px;
+    }
+    .proj p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .proj .foot{
+      margin-top: auto;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .tag{
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+
+    /* Footer */
+    footer{
+      padding: 28px 0 40px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .footer-inner{
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+      display:flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .proj-grid{ grid-template-columns: repeat(2, 1fr); }
+      .brand{ min-width: auto; }
+      nav ul{ justify-content: flex-start; }
+      .pub-tools{ justify-content: flex-start; }
+      .input{ min-width: 220px; flex: 1; }
+      .grid-2{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px){
+      .proj-grid{ grid-template-columns: 1fr; }
+      h1{ font-size: 24px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="Go to top">
+          <div class="avatar" aria-hidden="true"></div>
+          <div class="title">
+            <strong>홍길동</strong>
+            <span>Ph.D. Student · Wireless Networking / ISAC</span>
+          </div>
+        </a>
+
+        <nav aria-label="Primary navigation">
+          <ul>
+            <li><a href="#profile" data-nav>Profile</a></li>
+            <li><a href="#publications" data-nav>Publications</a></li>
+            <li><a href="#projects" data-nav>Projects</a></li>
+            <li><a href="#teaching" data-nav>Teaching</a></li>
+            <li><a href="#contact" data-nav>Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <div class="container hero">
+      <div class="hero-grid">
+        <div class="card hero-main">
+          <div class="kicker"><span class="dot"></span><span>Research · Publication · Projects</span></div>
+          <h1>홍길동 (Hong Gildong)</h1>
+          <p class="subtitle">
+            ○○대학교 ○○학과 박사과정입니다. 무선 네트워크/프로토콜 설계, ISAC(Integrated Sensing and Communication),
+            디지털 트윈 기반 시뮬레이션 및 네트워크 최적화에 관심이 있습니다.
+          </p>
+
+          <div class="btnrow">
+            <a class="btn primary" href="assets/CV.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+            <a class="btn" href="https://scholar.google.com/" target="_blank" rel="noopener">Google Scholar</a>
+            <a class="btn" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+
+          <div class="chips">
+            <span class="chip">Keywords: ISAC, 802.11, DT, QoS/QoE</span>
+            <span class="chip">Lab: Networking Systems Lab</span>
+            <span class="chip">Advisor: Prof. ○○○</span>
+          </div>
+        </div>
+
+        <aside class="card hero-side">
+          <div class="mini">
+            <h3>Affiliation</h3>
+            <p>Department of ○○, ○○ University</p>
+          </div>
+          <div class="mini">
+            <h3>Latest Update</h3>
+            <p>2026-01-16 · Publications/Projects updated</p>
+          </div>
+          <div class="mini">
+            <h3>Quick Links</h3>
+            <p>
+              <a class="link" href="#publications">Publications</a> ·
+              <a class="link" href="#projects">Projects</a> ·
+              <a class="link" href="#contact">Contact</a>
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- PROFILE -->
+    <section id="profile">
+      <div class="container">
+        <div class="card section-card">
+          <div class="section-head">
+            <h2>Profile</h2>
+            <div class="hint">Brief bio, education, interests</div>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <h3 style="margin:0 0 10px; font-size:14px;">Bio</h3>
+              <p style="margin:0; color:var(--muted); font-size:13px;">
+                간단한 자기소개를 5~7문장 정도로 작성합니다. 연구의 큰 문제의식(why), 접근법(how),
+                기여(impact)를 포함하면 좋습니다. 예: “저는 저지연/고신뢰 무선 네트워크 제어를 중심으로
+                혼잡/서지 상황에서의 적응형 MAC/자원할당 기법을 연구합니다.”
+              </p>
+              <div style="height:12px;"></div>
+              <h3 style="margin:0 0 10px; font-size:14px;">Research Interests</h3>
+              <div class="chips">
+                <span class="chip">Wireless Networking</span>
+                <span class="chip">IEEE 802.11 / Wi-Fi</span>
+                <span class="chip">ISAC & WLAN Sensing</span>
+                <span class="chip">Digital Twin Simulation</span>
+                <span class="chip">Optimization & Control</span>
+              </div>
+            </div>
+
+            <div>
+              <ul class="list">
+                <li>
+                  <strong>Education</strong>
+                  <span>Ph.D., ○○ University, Department of ○○ (2024–Present)</span>
+                  <span>M.S., ○○ University, Department of ○○ (2022–2024)</span>
+                  <span>B.S., ○○ University, Department of ○○ (2018–2022)</span>
+                </li>
+                <li>
+                  <strong>Experience</strong>
+                  <span>Research Assistant, Networking Systems Lab (2024–Present)</span>
+                  <span>Intern, ○○ Company (2023)</span>
+                </li>
+                <li>
+                  <strong>Awards & Scholarships</strong>
+                  <span>Best Paper Award, ○○ Conference (2025)</span>
+                  <span>Scholarship, ○○ Foundation (2024)</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications">
+      <div class="container">
+        <div class="card section-card">
+          <div class="section-head">
+            <h2>Publications</h2>
+            <div class="pub-tools">
+              <input id="pubSearch" class="input" type="search" placeholder="Search title/venue/keyword" aria-label="Search publications">
+              <select id="pubYear" class="select" aria-label="Filter by year">
+                <option value="all">All years</option>
+                <option value="2026">2026</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+              </select>
+            </div>
+          </div>
+
+          <ul class="pub-list" id="pubList">
+            <!-- Example items: copy & edit -->
+            <li class="pub" data-year="2026" data-keywords="isac wlan sensing digital twin">
+              <p class="title"><strong>[J1]</strong> Title of Your Journal Paper</p>
+              <p class="meta">Hong Gildong, Coauthor A, Coauthor B · <em>IEEE Access</em>, 2026</p>
+              <div class="badges">
+                <span class="badge">ISAC</span>
+                <span class="badge">802.11bf</span>
+                <span class="badge">DT</span>
+              </div>
+              <div class="links">
+                <a class="link" href="#" target="_blank" rel="noopener">PDF</a>
+                <a class="link" href="#" target="_blank" rel="noopener">DOI</a>
+                <a class="link" href="#" target="_blank" rel="noopener">BibTeX</a>
+              </div>
+            </li>
+
+            <li class="pub" data-year="2025" data-keywords="mac congestion control qos">
+              <p class="title"><strong>[C1]</strong> Title of Your Conference Paper</p>
+              <p class="meta">Hong Gildong, Coauthor A · <em>ACM/IEEE Conference Name</em>, 2025</p>
+              <div class="badges">
+                <span class="badge">MAC</span>
+                <span class="badge">Congestion</span>
+                <span class="badge">QoS</span>
+              </div>
+              <div class="links">
+                <a class="link" href="#" target="_blank" rel="noopener">PDF</a>
+                <a class="link" href="#" target="_blank" rel="noopener">Slides</a>
+              </div>
+            </li>
+
+            <li class="pub" data-year="2024" data-keywords="simulation sumo omnet">
+              <p class="title"><strong>[T1]</strong> Title of Your Thesis / Preprint</p>
+              <p class="meta">Hong Gildong · M.S. Thesis, ○○ University, 2024</p>
+              <div class="badges">
+                <span class="badge">Simulation</span>
+                <span class="badge">SUMO</span>
+                <span class="badge">OMNeT++</span>
+              </div>
+              <div class="links">
+                <a class="link" href="#" target="_blank" rel="noopener">PDF</a>
+              </div>
+            </li>
+          </ul>
+
+          <p id="pubEmpty" style="display:none; margin:12px 0 0; color:var(--muted); font-size:13px;">
+            No publications match the current filter.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="container">
+        <div class="card section-card">
+          <div class="section-head">
+            <h2>Projects</h2>
+            <div class="filters" aria-label="Project filters">
+              <button class="pill active" data-filter="all" type="button">All</button>
+              <button class="pill" data-filter="research" type="button">Research</button>
+              <button class="pill" data-filter="software" type="button">Software</button>
+              <button class="pill" data-filter="collab" type="button">Collaboration</button>
+            </div>
+          </div>
+
+          <div class="proj-grid" id="projGrid">
+            <!-- Example cards: copy & edit -->
+            <article class="proj" data-type="research">
+              <h3>Regime-Aware MAC Control in High-Density WLAN</h3>
+              <p>혼잡/서지 상황에서의 레짐 감지 및 적응형 파라미터 제어(예: CW/RAW/스케줄링)를 연구합니다.</p>
+              <div class="foot">
+                <span class="tag">Research</span>
+                <a class="link" href="#" target="_blank" rel="noopener">Details</a>
+              </div>
+            </article>
+
+            <article class="proj" data-type="software">
+              <h3>Digital Twin Simulation Toolkit</h3>
+              <p>SUMO/OMNeT++ 기반 시뮬레이션 파이프라인 자동화 및 재현성(설정/로그/리포트) 강화 도구.</p>
+              <div class="foot">
+                <span class="tag">Software</span>
+                <a class="link" href="#" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </article>
+
+            <article class="proj" data-type="collab">
+              <h3>Industry-Academia Collaboration: Smart City Sensing</h3>
+              <p>도시 환경에서의 비용/프라이버시 고려 센싱 및 네트워크 설계 협업 프로젝트.</p>
+              <div class="foot">
+                <span class="tag">Collaboration</span>
+                <a class="link" href="#" target="_blank" rel="noopener">Overview</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEACHING -->
+    <section id="teaching">
+      <div class="container">
+        <div class="card section-card">
+          <div class="section-head">
+            <h2>Teaching</h2>
+            <div class="hint">Courses, mentoring, materials</div>
+          </div>
+
+          <ul class="list">
+            <li>
+              <strong>Teaching Assistant</strong>
+              <span>Computer Networks (2025 Fall) · Lab sessions, grading, office hours</span>
+            </li>
+            <li>
+              <strong>Guest Lecture</strong>
+              <span>Wireless LAN Sensing & IEEE 802.11bf overview (2026 Spring)</span>
+            </li>
+            <li>
+              <strong>Mentoring</strong>
+              <span>Undergraduate research mentoring: simulation, Python, networking basics</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="card section-card">
+          <div class="section-head">
+            <h2>Contact</h2>
+            <div class="hint">Email, office, social</div>
+          </div>
+
+          <div class="grid-2">
+            <ul class="list">
+              <li>
+                <strong>Email</strong>
+                <span><a class="link" href="mailto:honggildong@univ.ac.kr">honggildong@univ.ac.kr</a></span>
+              </li>
+              <li>
+                <strong>Office</strong>
+                <span>Room 123, Building A, ○○ University, Seoul, Korea</span>
+              </li>
+            </ul>
+
+            <ul class="list">
+              <li>
+                <strong>Social</strong>
+                <span>
+                  <a class="link" href="https://scholar.google.com/" target="_blank" rel="noopener">Google Scholar</a> ·
+                  <a class="link" href="https://github.com/" target="_blank" rel="noopener">GitHub</a> ·
+                  <a class="link" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+                </span>
+              </li>
+              <li>
+                <strong>Address</strong>
+                <span>○○-ro, ○○-gu, Seoul, Republic of Korea</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-inner">
+          <div>© <span id="year"></span> Hong Gildong. All rights reserved.</div>
+          <div>Built with a single HTML file. Last updated: <span id="updated">2026-01-16</span></div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Active nav highlighting on scroll
+    const navLinks = Array.from(document.querySelectorAll("[data-nav]"));
+    const sections = navLinks
+      .map(a => document.querySelector(a.getAttribute("href")))
+      .filter(Boolean);
+
+    const setActive = () => {
+      const y = window.scrollY + 120;
+      let current = sections[0]?.id || "";
+      for (const sec of sections) {
+        if (sec.offsetTop <= y) current = sec.id;
+      }
+      navLinks.forEach(a => {
+        a.classList.toggle("active", a.getAttribute("href") === "#" + current);
+      });
+    };
+    window.addEventListener("scroll", setActive, { passive: true });
+    window.addEventListener("load", setActive);
+
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Publications: search + year filter
+    const pubSearch = document.getElementById("pubSearch");
+    const pubYear = document.getElementById("pubYear");
+    const pubItems = Array.from(document.querySelectorAll("#pubList .pub"));
+    const pubEmpty = document.getElementById("pubEmpty");
+
+    function filterPublications(){
+      const q = (pubSearch.value || "").trim().toLowerCase();
+      const y = pubYear.value;
+      let shown = 0;
+
+      pubItems.forEach(item => {
+        const yearMatch = (y === "all") || (item.dataset.year === y);
+        const hay = (
+          item.textContent + " " + (item.dataset.keywords || "")
+        ).toLowerCase();
+        const qMatch = !q || hay.includes(q);
+        const ok = yearMatch && qMatch;
+        item.style.display = ok ? "" : "none";
+        if (ok) shown++;
+      });
+
+      pubEmpty.style.display = shown === 0 ? "" : "none";
+    }
+
+    pubSearch.addEventListener("input", filterPublications);
+    pubYear.addEventListener("change", filterPublications);
+
+    // Projects: type filter
+    const pills = Array.from(document.querySelectorAll(".pill"));
+    const projCards = Array.from(document.querySelectorAll("#projGrid .proj"));
+
+    pills.forEach(p => p.addEventListener("click", () => {
+      pills.forEach(x => x.classList.remove("active"));
+      p.classList.add("active");
+      const f = p.dataset.filter;
+
+      projCards.forEach(card => {
+        const ok = (f === "all") || (card.dataset.type === f);
+        card.style.display = ok ? "" : "none";
+      });
+    }));
+  </script>
+</body>
+</html>
